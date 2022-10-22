@@ -9,7 +9,7 @@ public class PhieuDatPhong {
 	private LocalDateTime ngayDatPhong;
 	private LocalDateTime ngayNhanPhong;
 	private Phong maPhong;
-	private KhachHang soDienThoai;
+	private KhachHang maKhachHang;
 	public String getMaPhieuDatPhong() {
 		return maPhieuDatPhong;
 	}
@@ -40,21 +40,21 @@ public class PhieuDatPhong {
 	public void setMaPhong(Phong maPhong) {
 		this.maPhong = maPhong;
 	}
-	public KhachHang getSoDienThoai() {
-		return soDienThoai;
+	public KhachHang getMaKhachHang() {
+		return maKhachHang;
 	}
-	public void setSoDienThoai(KhachHang soDienThoai) {
-		this.soDienThoai = soDienThoai;
+	public void setMaKhachHang(KhachHang maKhachHang) {
+		this.maKhachHang = maKhachHang;
 	}
 	public PhieuDatPhong(String maPhieuDatPhong, int soGioDat, LocalDateTime ngayDatPhong, LocalDateTime ngayNhanPhong,
-			Phong maPhong, KhachHang soDienThoai) {
+			Phong maPhong, KhachHang maKhachHang) {
 		super();
 		this.maPhieuDatPhong = maPhieuDatPhong;
 		this.soGioDat = soGioDat;
 		this.ngayDatPhong = ngayDatPhong;
 		this.ngayNhanPhong = ngayNhanPhong;
 		this.maPhong = maPhong;
-		this.soDienThoai = soDienThoai;
+		this.maKhachHang = maKhachHang;
 	}
 	public PhieuDatPhong(String maPhieuDatPhong) {
 		super();
@@ -81,8 +81,9 @@ public class PhieuDatPhong {
 	@Override
 	public String toString() {
 		return "PhieuDatPhong [maPhieuDatPhong=" + maPhieuDatPhong + ", soGioDat=" + soGioDat + ", ngayDatPhong="
-				+ ngayDatPhong + ", ngayNhanPhong=" + ngayNhanPhong + ", maPhong=" + maPhong + ", soDienThoai="
-				+ soDienThoai + "]";
+				+ ngayDatPhong + ", ngayNhanPhong=" + ngayNhanPhong + ", maPhong=" + maPhong + ", maKhachHang="
+				+ maKhachHang + "]";
 	}
+	
 	
 }
