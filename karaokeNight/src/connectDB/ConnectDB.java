@@ -12,7 +12,7 @@ public class ConnectDB {
 	public void connect() throws SQLException {				
 			String url = "jdbc:sqlserver://localhost:1433;databasename=karaoke";
 			String user = "sa";
-			String password = "123456";
+			String password = "sapassword";
 			try {
 				con = DriverManager.getConnection(url, user, password);	
 			} catch (Exception e) {

@@ -6,10 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import connectDB.ConnectDB;
+import entity.Phong;
 import entity.TaiKhoan;
 
 public class Dao_TaiKhoan {
-	public TaiKhoan tk = new TaiKhoan("nhanvien01", "nhanvien01");
+	public TaiKhoan tk;
 	public TaiKhoan getTaiKhoan(String tenTaiKhoan,String matKhau) {
 		tenTaiKhoan ="nhanvien01";
 		matKhau ="nhanvien01";
@@ -31,4 +32,18 @@ public class Dao_TaiKhoan {
 		}
 		return tk;
 	}
+	public void updateTaiKhoan(TaiKhoan tk) {
+		ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		try {
+			String sql = "update TaiKhoan set matKhau =? where tenTaiKhoan = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, tk.getMatKhau());
+			stmt.setString(2, tk.getTenTaiKhoan());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

@@ -34,6 +34,7 @@ import dao.Dao_NhanVien;
 import dao.Dao_TaiKhoan;
 import entity.NhanVien;
 import entity.TaiKhoan;
+import java.awt.Color;
 
 public class GUI_ThongTinTaiKhoan extends JFrame {
 
@@ -57,6 +58,7 @@ public class GUI_ThongTinTaiKhoan extends JFrame {
 	private JRadioButton rdNu;
 	private ButtonGroup bgGioiTinh;
 	private JDateChooser dateChooser;
+	private JButton btnHuy;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -77,6 +79,7 @@ public class GUI_ThongTinTaiKhoan extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1480, 780);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(101, 186, 118));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
 		setContentPane(contentPane);
@@ -89,14 +92,9 @@ public class GUI_ThongTinTaiKhoan extends JFrame {
 			e.printStackTrace();
 		}
 		
-		JLabel lblThongTinTaiKhoan = new JLabel("Thông tin tài khoản");
-		lblThongTinTaiKhoan.setFont(new Font("Times New Roman", Font.BOLD, 30));
-		lblThongTinTaiKhoan.setHorizontalAlignment(SwingConstants.CENTER);
-		lblThongTinTaiKhoan.setBounds(590, 51, 300, 80);
-		contentPane.add(lblThongTinTaiKhoan);
-		
 		JPanel panel = new JPanel();
-		panel.setBounds(300, 188, 300, 30);
+		panel.setBackground(new Color(255, 255, 128));
+		panel.setBounds(270, 188, 330, 30);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -203,83 +201,88 @@ public class GUI_ThongTinTaiKhoan extends JFrame {
 		
 		
 		JLabel lblMaNhanVien = new JLabel("Mã nhân viên");
-		lblMaNhanVien.setBounds(0, 0, 90, 30);
+		lblMaNhanVien.setBackground(new Color(255, 255, 128));
+		lblMaNhanVien.setBounds(30, 0, 90, 30);
 		lblMaNhanVien.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		panel.add(lblMaNhanVien);
 		
 		txtMaNhanVien = new JTextField();
 		txtMaNhanVien.setEditable(false);
-		txtMaNhanVien.setBounds(100, 0, 200, 30);
+		txtMaNhanVien.setBounds(130, 0, 200, 30);
 		panel.add(txtMaNhanVien);
 		txtMaNhanVien.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 128));
 		panel_1.setLayout(null);
-		panel_1.setBounds(300, 288, 300, 30);
+		panel_1.setBounds(270, 288, 330, 30);
 		contentPane.add(panel_1);
 		
 		JLabel lblSoDienThoai = new JLabel("Số điện thoại");
 		lblSoDienThoai.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblSoDienThoai.setBounds(0, 0, 90, 30);
+		lblSoDienThoai.setBounds(30, 0, 90, 30);
 		panel_1.add(lblSoDienThoai);
 		
 		txtSoDienThoai = new JTextField();
 		txtSoDienThoai.setEditable(false);
 		txtSoDienThoai.setColumns(10);
-		txtSoDienThoai.setBounds(100, 0, 200, 30);
+		txtSoDienThoai.setBounds(130, 0, 200, 30);
 		panel_1.add(txtSoDienThoai);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(255, 255, 128));
 		panel_2.setLayout(null);
-		panel_2.setBounds(880, 188, 300, 30);
+		panel_2.setBounds(880, 188, 330, 30);
 		contentPane.add(panel_2);
 		
 		JLabel lblTenNhanVien = new JLabel("Tên nhân viên");
 		lblTenNhanVien.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblTenNhanVien.setBounds(0, 0, 90, 30);
+		lblTenNhanVien.setBounds(30, 0, 90, 30);
 		panel_2.add(lblTenNhanVien);
 		
 		txtTenNhanVien = new JTextField();
 		txtTenNhanVien.setEditable(false);
 		txtTenNhanVien.setColumns(10);
-		txtTenNhanVien.setBounds(100, 0, 200, 30);
+		txtTenNhanVien.setBounds(130, 0, 200, 30);
 		panel_2.add(txtTenNhanVien);
 		
 		JPanel panel_1_1 = new JPanel();
+		panel_1_1.setBackground(new Color(255, 255, 128));
 		panel_1_1.setLayout(null);
-		panel_1_1.setBounds(880, 288, 300, 30);
+		panel_1_1.setBounds(880, 288, 330, 30);
 		contentPane.add(panel_1_1);
 		
 		JLabel lblcmnd = new JLabel("CMND");
 		lblcmnd.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblcmnd.setBounds(0, 0, 90, 30);
+		lblcmnd.setBounds(30, 0, 90, 30);
 		panel_1_1.add(lblcmnd);
 		
 		txtcmnd = new JTextField();
 		txtcmnd.setEditable(false);
 		txtcmnd.setColumns(10);
-		txtcmnd.setBounds(100, 0, 200, 30);
+		txtcmnd.setBounds(130, 0, 200, 30);
 		panel_1_1.add(txtcmnd);
 		
 		JPanel panel_1_2 = new JPanel();
+		panel_1_2.setBackground(new Color(255, 255, 128));
 		panel_1_2.setLayout(null);
-		panel_1_2.setBounds(300, 388, 300, 30);
+		panel_1_2.setBounds(270, 388, 330, 30);
 		contentPane.add(panel_1_2);
 		
 		JLabel lblGioiTinh = new JLabel("Giới tính");
 		lblGioiTinh.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblGioiTinh.setBounds(0, 0, 90, 30);
+		lblGioiTinh.setBounds(30, 0, 90, 30);
 		panel_1_2.add(lblGioiTinh);
 		
 		rdNam = new JRadioButton("Nam");
 		rdNam.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		rdNam.setBounds(100, 0, 100, 30);
+		rdNam.setBounds(130, 0, 100, 30);
 		panel_1_2.add(rdNam);
 		rdNam.setEnabled(false);
 		
 		rdNu = new JRadioButton("Nữ");
 		rdNu.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		rdNu.setBounds(200, 0, 100, 30);
+		rdNu.setBounds(230, 0, 100, 30);
 		panel_1_2.add(rdNu);
 		rdNu.setEnabled(false);
 		
@@ -288,35 +291,37 @@ public class GUI_ThongTinTaiKhoan extends JFrame {
 		bgGioiTinh.add(rdNu);
 		
 		JPanel panel_1_1_1 = new JPanel();
+		panel_1_1_1.setBackground(new Color(255, 255, 128));
 		panel_1_1_1.setLayout(null);
-		panel_1_1_1.setBounds(880, 388, 300, 30);
+		panel_1_1_1.setBounds(880, 388, 330, 30);
 		contentPane.add(panel_1_1_1);
 		
 		JLabel lblChucVu = new JLabel("Chức vụ");
 		lblChucVu.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblChucVu.setBounds(0, 0, 90, 30);
+		lblChucVu.setBounds(30, 0, 90, 30);
 		panel_1_1_1.add(lblChucVu);
 		
 		txtChucVu = new JTextField();
 		txtChucVu.setEditable(false);
 		txtChucVu.setColumns(10);
-		txtChucVu.setBounds(100, 0, 200, 30);
+		txtChucVu.setBounds(130, 0, 200, 30);
 		panel_1_1_1.add(txtChucVu);
 		
 		JPanel panel_1_3 = new JPanel();
+		panel_1_3.setBackground(new Color(255, 255, 128));
 		panel_1_3.setLayout(null);
-		panel_1_3.setBounds(300, 588, 480, 30);
+		panel_1_3.setBounds(270, 588, 510, 30);
 		contentPane.add(panel_1_3);
 		
 		JLabel lblDiaChi = new JLabel("Địa chỉ");
 		lblDiaChi.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblDiaChi.setBounds(0, 0, 90, 30);
+		lblDiaChi.setBounds(30, 0, 90, 30);
 		panel_1_3.add(lblDiaChi);
 		
 		txtDiaChi = new JTextField();
 		txtDiaChi.setEditable(false);
 		txtDiaChi.setColumns(10);
-		txtDiaChi.setBounds(100, 0, 380, 30);
+		txtDiaChi.setBounds(130, 0, 380, 30);
 		panel_1_3.add(txtDiaChi);
 		
 		JButton btnSua = new JButton("Sửa");
@@ -338,7 +343,13 @@ public class GUI_ThongTinTaiKhoan extends JFrame {
 		btnSua.setBounds(880, 650, 100, 30);
 		contentPane.add(btnSua);
 		
-		JButton btnHuy = new JButton("Hủy");
+		btnHuy = new JButton("Hủy");
+		btnHuy.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				khoaTextField();
+				docDuLieuTuSQL();
+			}
+		});
 		btnHuy.setEnabled(false);
 		btnHuy.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		btnHuy.setBounds(1017, 650, 100, 30);
@@ -355,43 +366,58 @@ public class GUI_ThongTinTaiKhoan extends JFrame {
 		contentPane.add(btnThoat);
 		
 		JPanel panel_1_1_2 = new JPanel();
+		panel_1_1_2.setBackground(new Color(255, 255, 128));
 		panel_1_1_2.setLayout(null);
-		panel_1_1_2.setBounds(300, 488, 300, 30);
+		panel_1_1_2.setBounds(270, 488, 330, 30);
 		contentPane.add(panel_1_1_2);
 		
 		JLabel lblNgaySinh = new JLabel("Ngày Sinh");
 		lblNgaySinh.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblNgaySinh.setBounds(0, 0, 90, 30);
+		lblNgaySinh.setBounds(30, 0, 90, 30);
 		panel_1_1_2.add(lblNgaySinh);
 		
 		txtNgaySinh = new JTextField();
 		txtNgaySinh.setEditable(false);
 		txtNgaySinh.setColumns(10);
-		txtNgaySinh.setBounds(100, 0, 170, 30);
+		txtNgaySinh.setBounds(130, 0, 170, 30);
 		panel_1_1_2.add(txtNgaySinh);
 		
 		dateChooser = new JDateChooser();
 		dateChooser.setDateFormatString("dd/MM/YYYY");
 		dateChooser.getCalendarButton().setBounds(169, 0, 31, 30);
-		dateChooser.setBounds(100, 0, 200, 30);
+		dateChooser.setBounds(130, 0, 200, 30);
 		panel_1_1_2.add(dateChooser);
 		dateChooser.setLayout(null);
 		
 		JPanel pnEmail = new JPanel();
+		pnEmail.setBackground(new Color(255, 255, 128));
 		pnEmail.setLayout(null);
-		pnEmail.setBounds(880, 488, 300, 30);
+		pnEmail.setBounds(880, 488, 330, 30);
 		contentPane.add(pnEmail);
 		
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblEmail.setBounds(0, 0, 90, 30);
+		lblEmail.setBounds(30, 0, 90, 30);
 		pnEmail.add(lblEmail);
 		
 		txtEmail = new JTextField();
 		txtEmail.setEditable(false);
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(100, 0, 200, 30);
+		txtEmail.setBounds(130, 0, 200, 30);
 		pnEmail.add(txtEmail);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(255, 255, 140));
+		panel_3.setBounds(270, 69, 940, 72);
+		contentPane.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JLabel lblThongTinTaiKhoan = new JLabel("Thông tin tài khoản");
+		lblThongTinTaiKhoan.setBounds(344, 15, 257, 35);
+		panel_3.add(lblThongTinTaiKhoan);
+		lblThongTinTaiKhoan.setBackground(new Color(255, 255, 140));
+		lblThongTinTaiKhoan.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		lblThongTinTaiKhoan.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		docDuLieuTuSQL();
 	}
@@ -418,6 +444,7 @@ public class GUI_ThongTinTaiKhoan extends JFrame {
 		txtDiaChi.setEditable(true);
 		txtEmail.setEditable(true);
 		txtcmnd.setEditable(true);
+		btnHuy.setEnabled(true);
 		dateChooser.getDateEditor().addPropertyChangeListener(
 			    new PropertyChangeListener() {
 			        @Override
@@ -437,6 +464,7 @@ public class GUI_ThongTinTaiKhoan extends JFrame {
 		txtDiaChi.setEditable(false);
 		txtEmail.setEditable(false);
 		txtcmnd.setEditable(false);
+		btnHuy.setEnabled(false);
 		dateChooser.getDateEditor().addPropertyChangeListener(
 			    new PropertyChangeListener() {
 			        @Override
