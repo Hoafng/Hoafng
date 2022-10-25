@@ -3,6 +3,7 @@ package entity;
 import java.util.Objects;
 
 public class KhachHang {
+	/*hoang ngu*/
 	private String maKhachHang;
 	private String soDienThoai;
 	private String tenKhachHang;
