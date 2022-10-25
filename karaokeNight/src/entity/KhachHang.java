@@ -3,8 +3,15 @@ package entity;
 import java.util.Objects;
 
 public class KhachHang {
+	private String maKhachHang;
 	private String soDienThoai;
 	private String tenKhachHang;
+	public String getMaKhachHang() {
+		return maKhachHang;
+	}
+	public void setMaKhachHang(String maKhachHang) {
+		this.maKhachHang = maKhachHang;
+	}
 	public String getSoDienThoai() {
 		return soDienThoai;
 	}
@@ -17,21 +24,22 @@ public class KhachHang {
 	public void setTenKhachHang(String tenKhachHang) {
 		this.tenKhachHang = tenKhachHang;
 	}
-	public KhachHang(String soDienThoai, String tenKhachHang) {
+	public KhachHang(String maKhachHang, String soDienThoai, String tenKhachHang) {
 		super();
+		this.maKhachHang = maKhachHang;
 		this.soDienThoai = soDienThoai;
 		this.tenKhachHang = tenKhachHang;
 	}
-	public KhachHang(String soDienThoai) {
+	public KhachHang(String maKhachHang) {
 		super();
-		this.soDienThoai = soDienThoai;
+		this.maKhachHang = maKhachHang;
 	}
 	public KhachHang() {
 		super();
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(soDienThoai);
+		return Objects.hash(maKhachHang);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -42,11 +50,12 @@ public class KhachHang {
 		if (getClass() != obj.getClass())
 			return false;
 		KhachHang other = (KhachHang) obj;
-		return Objects.equals(soDienThoai, other.soDienThoai);
+		return Objects.equals(maKhachHang, other.maKhachHang);
 	}
 	@Override
 	public String toString() {
-		return "KhachHang [soDienThoai=" + soDienThoai + ", tenKhachHang=" + tenKhachHang + "]";
+		return "KhachHang [maKhachHang=" + maKhachHang + ", soDienThoai=" + soDienThoai + ", tenKhachHang="
+				+ tenKhachHang + "]";
 	}
 	
 }
