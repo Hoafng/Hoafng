@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import connectDB.ConnectDB;
 import entity.LoaiPhong;
@@ -24,15 +23,16 @@ public class Dao_Phong {
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(sql);
 			while (rs.next()) {
-				LoaiPhong loaiPhong = new LoaiPhong(rs.getString("maLoaiPhong"),rs.getString("tenLoaiPhong"));
-				dsPhong.add(
-						new Phong(rs.getString("maPhong"),rs.getString("tinhTrang"),rs.getDouble("giaPhong"), rs.getInt("soLuongNguoi"),loaiPhong));
+				LoaiPhong loaiPhong = new LoaiPhong(rs.getString("maLoaiPhong"), rs.getString("tenLoaiPhong"));
+				dsPhong.add(new Phong(rs.getString("maPhong"), rs.getString("tinhTrang"), rs.getDouble("giaPhong"),
+						rs.getInt("soLuongNguoi"), loaiPhong));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return dsPhong;
 	}
+
 	public ArrayList<Phong> getPhongTheoTinhTrang(String tinhTrang) {
 		ArrayList<Phong> dsPhongTheoTinhTrang = new ArrayList<Phong>();
 		ConnectDB.getInstance();
@@ -40,20 +40,21 @@ public class Dao_Phong {
 		PreparedStatement statement = null;
 		try {
 			String sql = "select maPhong,tinhTrang,giaPhong,soLuongNguoi,p.maLoaiPhong,tenLoaiPhong from Phong p\r\n"
-					+ "join LoaiPhong lp on p.maLoaiPhong = lp.maLoaiPhong where tinhTrang = ?" ;
+					+ "join LoaiPhong lp on p.maLoaiPhong = lp.maLoaiPhong where tinhTrang = ?";
 			statement = con.prepareStatement(sql);
 			statement.setString(1, tinhTrang);
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
-				LoaiPhong loaiPhong = new LoaiPhong(rs.getString("maLoaiPhong"),rs.getString("tenLoaiPhong"));
-				dsPhongTheoTinhTrang.add(
-						new Phong(rs.getString("maPhong"),rs.getString("tinhTrang"),rs.getDouble("giaPhong"), rs.getInt("soLuongNguoi"),loaiPhong));
+				LoaiPhong loaiPhong = new LoaiPhong(rs.getString("maLoaiPhong"), rs.getString("tenLoaiPhong"));
+				dsPhongTheoTinhTrang.add(new Phong(rs.getString("maPhong"), rs.getString("tinhTrang"),
+						rs.getDouble("giaPhong"), rs.getInt("soLuongNguoi"), loaiPhong));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return dsPhongTheoTinhTrang;
 	}
+
 	public ArrayList<Phong> getPhongTheoLoaiPhong(String maLoaiPhong) {
 		ArrayList<Phong> dsPhongTheoTinhTrang = new ArrayList<Phong>();
 		ConnectDB.getInstance();
@@ -61,20 +62,21 @@ public class Dao_Phong {
 		PreparedStatement statement = null;
 		try {
 			String sql = "select maPhong,tinhTrang,giaPhong,soLuongNguoi,p.maLoaiPhong,tenLoaiPhong from Phong p\r\n"
-					+ "join LoaiPhong lp on p.maLoaiPhong = lp.maLoaiPhong where lp.maLoaiPhong = ?" ;
+					+ "join LoaiPhong lp on p.maLoaiPhong = lp.maLoaiPhong where lp.maLoaiPhong = ?";
 			statement = con.prepareStatement(sql);
 			statement.setString(1, maLoaiPhong);
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
-				LoaiPhong loaiPhong = new LoaiPhong(rs.getString("maLoaiPhong"),rs.getString("tenLoaiPhong"));
-				dsPhongTheoTinhTrang.add(
-						new Phong(rs.getString("maPhong"),rs.getString("tinhTrang"),rs.getDouble("giaPhong"), rs.getInt("soLuongNguoi"),loaiPhong));
+				LoaiPhong loaiPhong = new LoaiPhong(rs.getString("maLoaiPhong"), rs.getString("tenLoaiPhong"));
+				dsPhongTheoTinhTrang.add(new Phong(rs.getString("maPhong"), rs.getString("tinhTrang"),
+						rs.getDouble("giaPhong"), rs.getInt("soLuongNguoi"), loaiPhong));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return dsPhongTheoTinhTrang;
 	}
+
 	public ArrayList<Phong> getPhongTheoMaPhong(String maPhong) {
 		ArrayList<Phong> dsPhongTheoTinhTrang = new ArrayList<Phong>();
 		ConnectDB.getInstance();
@@ -82,20 +84,21 @@ public class Dao_Phong {
 		PreparedStatement statement = null;
 		try {
 			String sql = "select maPhong,tinhTrang,giaPhong,soLuongNguoi,p.maLoaiPhong,tenLoaiPhong from Phong p\r\n"
-					+ "join LoaiPhong lp on p.maLoaiPhong = lp.maLoaiPhong where maPhong = ?" ;
+					+ "join LoaiPhong lp on p.maLoaiPhong = lp.maLoaiPhong where maPhong = ?";
 			statement = con.prepareStatement(sql);
 			statement.setString(1, maPhong);
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
-				LoaiPhong loaiPhong = new LoaiPhong(rs.getString("maLoaiPhong"),rs.getString("tenLoaiPhong"));
-				dsPhongTheoTinhTrang.add(
-						new Phong(rs.getString("maPhong"),rs.getString("tinhTrang"),rs.getDouble("giaPhong"), rs.getInt("soLuongNguoi"),loaiPhong));
+				LoaiPhong loaiPhong = new LoaiPhong(rs.getString("maLoaiPhong"), rs.getString("tenLoaiPhong"));
+				dsPhongTheoTinhTrang.add(new Phong(rs.getString("maPhong"), rs.getString("tinhTrang"),
+						rs.getDouble("giaPhong"), rs.getInt("soLuongNguoi"), loaiPhong));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return dsPhongTheoTinhTrang;
 	}
+
 	public boolean insertPhong(Phong phong) {
 		ConnectDB.getInstance();
 		Connection con = ConnectDB.getConnection();
@@ -115,5 +118,70 @@ public class Dao_Phong {
 			return false;
 		}
 	}
-	
+
+	public Phong getPhong(String maPhong) {
+		ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		PreparedStatement statement = null;
+		Phong p = null;
+		try {
+			String sql = "select maPhong,tinhTrang,giaPhong,soLuongNguoi,p.maLoaiPhong,tenLoaiPhong from Phong p\r\n"
+					+ "join LoaiPhong lp on p.maLoaiPhong = lp.maLoaiPhong where maPhong = ?" ;
+			statement = con.prepareStatement(sql);
+			statement.setString(1, maPhong);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next()) {
+				LoaiPhong loaiPhong = new LoaiPhong(rs.getString("maLoaiPhong"),rs.getString("tenLoaiPhong"));
+				p=new Phong(rs.getString("maPhong"),rs.getString("tinhTrang"),rs.getDouble("giaPhong"), rs.getInt("soLuongNguoi"),loaiPhong);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
+
+	public void deletePhong(Phong p) {
+		ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		PreparedStatement statement = null;
+		try {
+			String sql = "Delete From Phong Where maPhong = ?";
+			statement = con.prepareStatement(sql);
+			statement.setString(1, p.getMaPhong());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void updatePhong(Phong p) {
+		ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		try {
+			String sql = "update Phong set soLuongNguoi =?,giaPhong =? where maPhong = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, p.getSoLuongNguoi());
+			stmt.setDouble(2, p.getGiaPhong());
+			stmt.setString(3, p.getMaPhong());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	public void updateTinhTrang(String maPhong,String tinhTrang) {
+		ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		try {
+			String sql = "update Phong set tinhTrang =? where maPhong = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, tinhTrang);
+			stmt.setString(2, maPhong);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }

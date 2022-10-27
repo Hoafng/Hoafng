@@ -39,13 +39,13 @@ public class DanhSachPhong {
 		lblIconPhong.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIconPhong.setVerticalAlignment(SwingConstants.CENTER);
 		if(p.getTinhTrang().equals("Trống"))
-			lblIconPhong.setIcon(new ImageIcon(GUI_XuLy.class.getResource("/image/home-icon-trong.png")));
+			lblIconPhong.setIcon(new ImageIcon("image\\home-icon-trong.png"));
 		else if(p.getTinhTrang().equals("Đã đặt"))
-			lblIconPhong.setIcon(new ImageIcon(GUI_XuLy.class.getResource("/image/home-icon-dadat.png")));
+			lblIconPhong.setIcon(new ImageIcon("image\\home-icon-dadat.png"));
 		else if(p.getTinhTrang().equals("Đang chờ"))
-			lblIconPhong.setIcon(new ImageIcon(GUI_XuLy.class.getResource("/image/home-icon-dangcho.png")));
+			lblIconPhong.setIcon(new ImageIcon("image\\home-icon-dangcho.png"));
 		else if(p.getTinhTrang().equals("Đang sử dụng"))
-			lblIconPhong.setIcon(new ImageIcon(GUI_XuLy.class.getResource("/image/home-icon-dangsudung.png")));
+			lblIconPhong.setIcon(new ImageIcon("image\\home-icon-dangsudung.png"));
 
 		JLabel lblSoPhong = new JLabel();
 		lblSoPhong.setText(p.getMaPhong());

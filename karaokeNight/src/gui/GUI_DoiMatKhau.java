@@ -30,30 +30,17 @@ public class GUI_DoiMatKhau extends JFrame {
 	private JTextField txtXacNhanMK;
 	private JButton btnXacNhan;
 	private JLabel lblThongBao;
-	private Dao_TaiKhoan dao_TaiKhoan;
-	private UI_TrangChu trangChu = new UI_TrangChu();
-	private TaiKhoan tk = trangChu.taiKhoan;
+	private Dao_TaiKhoan dao_TaiKhoan = new Dao_TaiKhoan();
+	private TaiKhoan tk ;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI_DoiMatKhau frame = new GUI_DoiMatKhau();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public GUI_DoiMatKhau() {
+	public GUI_DoiMatKhau(TaiKhoan taiKhoan) {
 		try {
 			ConnectDB.getInstance().connect();
 		} catch (SQLException e) {
@@ -67,7 +54,9 @@ public class GUI_DoiMatKhau extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setResizable(false);
 		setLocationRelativeTo(null);
-
+		
+		tk=taiKhoan;
+		
 		try {
 			ConnectDB.getInstance().connect();
 		} catch (SQLException e) {
@@ -151,8 +140,9 @@ public class GUI_DoiMatKhau extends JFrame {
 							JOptionPane.YES_NO_OPTION);
 					if (a == JOptionPane.YES_OPTION) {
 						doiMatKhau();
-						dispose();
-
+						txtMKHienTai.setText("");
+						txtMKMoi.setText("");
+						txtXacNhanMK.setText("");
 					}
 				}
 			}
@@ -216,8 +206,7 @@ public class GUI_DoiMatKhau extends JFrame {
 			lblThongBao.setText("Mật khẩu xác nhận không chính xác");
 			txtXacNhanMK.requestFocus();
 			return false;
-		}
-		else
+		} else
 			lblThongBao.setText("");
 		return true;
 	}

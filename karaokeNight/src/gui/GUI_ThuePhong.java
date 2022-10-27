@@ -1,18 +1,20 @@
 package gui;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
+import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JList;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import entity.Phong;
+import entity.TaiKhoan;
 
 public class GUI_ThuePhong extends JFrame {
 
@@ -24,34 +26,28 @@ public class GUI_ThuePhong extends JFrame {
 	private JTextField textField_SoLuongNguoi;
 	private JTextField textField_MaPhong;
 	private JTextField textField_GiaPhong;
+	private Phong p;
+	private TaiKhoan tk;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI_ThuePhong frame = new GUI_ThuePhong();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
-	public GUI_ThuePhong() {
+	public GUI_ThuePhong(Phong phong,TaiKhoan taiKhoan) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 720, 480);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		setLocationRelativeTo(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBackground(new Color(101, 186, 118));
+		p=phong;
+		tk=taiKhoan;
 		
 		JLabel lblThuPhng = new JLabel("Thuê Phòng");
 		lblThuPhng.setBounds(280, 10, 158, 48);
@@ -133,35 +129,35 @@ public class GUI_ThuePhong extends JFrame {
 		contentPane.add(comboBox_Phut);
 		
 		textField_MaNhanVien = new JTextField();
-		textField_MaNhanVien.setEnabled(false);
+		textField_MaNhanVien.setEditable(false);
 		textField_MaNhanVien.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textField_MaNhanVien.setColumns(10);
 		textField_MaNhanVien.setBounds(165, 142, 158, 40);
 		contentPane.add(textField_MaNhanVien);
 		
 		textField_LoaiPhong = new JTextField();
-		textField_LoaiPhong.setEnabled(false);
+		textField_LoaiPhong.setEditable(false);
 		textField_LoaiPhong.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textField_LoaiPhong.setColumns(10);
 		textField_LoaiPhong.setBounds(165, 218, 158, 40);
 		contentPane.add(textField_LoaiPhong);
 		
 		textField_SoLuongNguoi = new JTextField();
-		textField_SoLuongNguoi.setEnabled(false);
+		textField_SoLuongNguoi.setEditable(false);
 		textField_SoLuongNguoi.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textField_SoLuongNguoi.setColumns(10);
 		textField_SoLuongNguoi.setBounds(165, 288, 158, 40);
 		contentPane.add(textField_SoLuongNguoi);
 		
 		textField_MaPhong = new JTextField();
-		textField_MaPhong.setEnabled(false);
+		textField_MaPhong.setEditable(false);
 		textField_MaPhong.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textField_MaPhong.setColumns(10);
 		textField_MaPhong.setBounds(470, 142, 158, 40);
 		contentPane.add(textField_MaPhong);
 		
 		textField_GiaPhong = new JTextField();
-		textField_GiaPhong.setEnabled(false);
+		textField_GiaPhong.setEditable(false);
 		textField_GiaPhong.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textField_GiaPhong.setColumns(10);
 		textField_GiaPhong.setBounds(470, 218, 158, 40);
@@ -175,6 +171,8 @@ public class GUI_ThuePhong extends JFrame {
 		JButton btnHuy = new JButton("Hủy");
 		btnHuy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new GUI_XuLy(tk).setVisible(true);
 			}
 		});
 		btnHuy.setFont(new Font("Times New Roman", Font.BOLD, 20));

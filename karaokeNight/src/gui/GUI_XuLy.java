@@ -38,8 +38,11 @@ import javax.swing.border.TitledBorder;
 
 import connectDB.ConnectDB;
 import dao.DanhSachPhong;
+import dao.Dao_NhanVien;
 import dao.Dao_Phong;
+import entity.NhanVien;
 import entity.Phong;
+import entity.TaiKhoan;
 
 public class GUI_XuLy extends JFrame implements MouseListener {
 
@@ -57,7 +60,6 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 	private JRadioButton rdLoaiPhongTatCa;
 	private JRadioButton rdLoaiPhongThuong;
 	private JRadioButton rdLoaiPhongVip;
-	private Phong phong;
 //	private JLabel lblIconPhong;
 //	private JLabel lblSoPhong;
 //	private JLabel lblSoLuongNguoi;
@@ -69,29 +71,20 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 	private JTextField txtThongTinGiaPhong;
 	private JTextField txtTinTrangPhong;
 	private JTextField txtThongTinMaPhong;
-	private JTextField textField;
+	private Phong phong;
+	private TaiKhoan tk;
+	private JLabel lblThongTinNhanVien;
+	private Dao_NhanVien dao_NhanVien=new Dao_NhanVien();
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI_XuLy frame = new GUI_XuLy();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
 
-	public GUI_XuLy() {
+	public GUI_XuLy(TaiKhoan taiKhoan) {
 
 		try {
 			ConnectDB.getInstance().connect();
@@ -99,7 +92,7 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		tk =taiKhoan;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1480, 780);
 		setLocationRelativeTo(null);
@@ -168,7 +161,7 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 			}
 		});
 
-		btnTimPhong.setIcon(new ImageIcon(GUI_XuLy.class.getResource("/image/baseline_search_black_24dp.png")));
+		btnTimPhong.setIcon(new ImageIcon("image\\baseline_search_black_24dp.png"));
 		btnTimPhong.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		btnTimPhong.setBounds(850, 23, 180, 30);
 		panel.add(btnTimPhong);
@@ -177,10 +170,10 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 		btnLamMoi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new GUI_XuLy().setVisible(true);
+				new GUI_XuLy(tk).setVisible(true);
 			}
 		});
-		btnLamMoi.setIcon(new ImageIcon(GUI_XuLy.class.getResource("/image/baseline_update_black_24dp.png")));
+		btnLamMoi.setIcon(new ImageIcon("image\\baseline_update_black_24dp.png"));
 		btnLamMoi.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		btnLamMoi.setBounds(850, 54, 180, 30);
 		panel.add(btnLamMoi);
@@ -207,32 +200,31 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 		panel_1.setLayout(null);
 
 		JLabel lblNewLabel_1_1 = new JLabel("Đang chờ");
-		lblNewLabel_1_1.setIcon(new ImageIcon(GUI_XuLy.class.getResource("/image/home-icon-dangcho.png")));
+		lblNewLabel_1_1.setIcon(new ImageIcon("image\\home-icon-dangcho.png"));
 		lblNewLabel_1_1.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		lblNewLabel_1_1.setBounds(150, 20, 150, 30);
 		panel_1.add(lblNewLabel_1_1);
 
 		JLabel lblNewLabel_1_2 = new JLabel("Đang sử dụng");
-		lblNewLabel_1_2.setIcon(new ImageIcon(GUI_XuLy.class.getResource("/image/home-icon-dangsudung.png")));
+		lblNewLabel_1_2.setIcon(new ImageIcon("image\\home-icon-dangsudung.png"));
 		lblNewLabel_1_2.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		lblNewLabel_1_2.setBounds(295, 20, 150, 30);
 		panel_1.add(lblNewLabel_1_2);
 
 		JLabel lblNewLabel_1_3 = new JLabel("Trống");
-		lblNewLabel_1_3.setIcon(new ImageIcon(GUI_XuLy.class.getResource("/image/home-icon-trong.png")));
+		lblNewLabel_1_3.setIcon(new ImageIcon("image\\home-icon-trong.png"));
 		lblNewLabel_1_3.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		lblNewLabel_1_3.setBounds(455, 20, 150, 30);
 		panel_1.add(lblNewLabel_1_3);
 
 		JLabel lblNewLabel_1_4 = new JLabel("Phòng vip");
-		lblNewLabel_1_4
-				.setIcon(new ImageIcon(GUI_XuLy.class.getResource("/image/295-2959091_vip-comments-vip-icon-png.png")));
+		lblNewLabel_1_4.setIcon(new ImageIcon("image\\295-2959091_vip-comments-vip-icon-png.png"));
 		lblNewLabel_1_4.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		lblNewLabel_1_4.setBounds(602, 20, 150, 30);
 		panel_1.add(lblNewLabel_1_4);
 
 		JLabel lblNewLabel_1_1_1 = new JLabel("Đã đặt");
-		lblNewLabel_1_1_1.setIcon(new ImageIcon(GUI_XuLy.class.getResource("/image/home-icon-dadat.png")));
+		lblNewLabel_1_1_1.setIcon(new ImageIcon("image\\home-icon-dadat.png"));
 		lblNewLabel_1_1_1.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		lblNewLabel_1_1_1.setBounds(30, 20, 150, 30);
 		panel_1.add(lblNewLabel_1_1_1);
@@ -269,6 +261,14 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		lblNewLabel.setBackground(new Color(255, 255, 140));
 		panel_5.add(lblNewLabel);
+		
+		lblThongTinNhanVien = new JLabel("");
+		lblThongTinNhanVien.setIcon(new ImageIcon("image\\nhanVien.png"));
+		lblThongTinNhanVien.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		lblThongTinNhanVien.setBounds(1210, 12, 228, 48);
+		NhanVien nv=dao_NhanVien.getNhanVien(tk.getTenTaiKhoan());
+		lblThongTinNhanVien.setText(nv.getTenNhanVien());
+		panel_5.add(lblThongTinNhanVien);
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(5, 1, 377, 20);
@@ -278,29 +278,35 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 		mnTrangChu.setFont(UIManager.getFont("Menu.font"));
 		menuBar.add(mnTrangChu);
 
-		JMenuItem mntmDoiMatKhau = new JMenuItem("Đổi mật khẩu");
-		mntmDoiMatKhau.addActionListener(new ActionListener() {
+		JMenuItem mntmTrangChu = new JMenuItem("Trang chủ");
+		mntmTrangChu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new GUI_DoiMatKhau().setVisible(true);
+				new GUI_TrangChu(tk).setVisible(true);
 			}
 		});
-
-		JMenuItem mntmTrangChu = new JMenuItem("Trang chủ");
 		mnTrangChu.add(mntmTrangChu);
 
 		JMenuItem mntmThongTinTaiKhoan = new JMenuItem("Thông tin tài khoản");
 		mntmThongTinTaiKhoan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new GUI_ThongTinTaiKhoan().setVisible(true);
+				new GUI_ThongTinTaiKhoan(tk).setVisible(true);
 			}
 		});
 		mnTrangChu.add(mntmThongTinTaiKhoan);
+
+		JMenuItem mntmDoiMatKhau = new JMenuItem("Đổi mật khẩu");
+		mntmDoiMatKhau.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new GUI_DoiMatKhau(tk).setVisible(true);
+			}
+		});
 		mnTrangChu.add(mntmDoiMatKhau);
 
 		JMenuItem mntmDangXuat = new JMenuItem("Đăng xuất");
 		mntmDangXuat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				new GUI_DangNhap().setVisible(true);
 			}
 		});
 		mnTrangChu.add(mntmDangXuat);
@@ -315,28 +321,46 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 		mnDanhMuc.add(separator_1);
 
 		JMenuItem mntmDanhMucDichVu = new JMenuItem("Dịch vụ");
+		mntmDanhMucDichVu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new GUI_DichVu(tk).setVisible(true);
+			}
+		});
 		mnDanhMuc.add(mntmDanhMucDichVu);
 
 		JMenuItem mntmDanhMucKhachHang = new JMenuItem("Khách hàng");
+		mntmDanhMucKhachHang.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new GUI_KhachHang(tk).setVisible(true);
+			}
+		});
 		mnDanhMuc.add(mntmDanhMucKhachHang);
 
 		JMenuItem mntmDanhMucPhong = new JMenuItem("Phòng");
 		mntmDanhMucPhong.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new GUI_Phong().setVisible(true);
+				new GUI_Phong(tk).setVisible(true);
 			}
 		});
 		mnDanhMuc.add(mntmDanhMucPhong);
 
 		JMenuItem mntmDanhMucNhanVien = new JMenuItem("Nhân viên");
+		mntmDanhMucNhanVien.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new GUI_NhanVien(tk).setVisible(true);
+			}
+		});
 		mnDanhMuc.add(mntmDanhMucNhanVien);
 
 		JMenuItem mnXuLi = new JMenuItem(" Xử lí  ");
 		mnXuLi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new GUI_XuLy().setVisible(true);
+				new GUI_XuLy(tk).setVisible(true);
 			}
 		});
 		mnXuLi.setFont(UIManager.getFont("Menu.font"));
@@ -349,9 +373,21 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 		mnTimKiem.add(separator_2);
 
 		JMenuItem mntmTimKiemDichVu = new JMenuItem("Dịch vụ");
+		mntmTimKiemDichVu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new GUI_TimKiemDichVu(tk).setVisible(true);
+			}
+		});
 		mnTimKiem.add(mntmTimKiemDichVu);
 
 		JMenuItem mntmTimKiemHoaDon = new JMenuItem("Hóa đơn");
+		mntmTimKiemHoaDon.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new GUI_TimKiemHoaDon(tk).setVisible(true);
+			}
+		});
 		mnTimKiem.add(mntmTimKiemHoaDon);
 
 		JMenu mnThongKe = new JMenu("Thống kê");
@@ -361,14 +397,39 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 		mnThongKe.add(separator_3);
 
 		JMenuItem mntmThongKeDoanhThu = new JMenuItem("Doanh thu");
+		mntmThongKeDoanhThu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new GUI_ThongKeHoaDon(tk).setVisible(true);
+			}
+		});
 		mnThongKe.add(mntmThongKeDoanhThu);
 
 		JMenuItem mntmThongKeDichVu = new JMenuItem("Dịch vụ");
+		mntmThongKeDichVu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new GUI_ThongKeDichVu(tk).setVisible(true);
+			}
+		});
 		mnThongKe.add(mntmThongKeDichVu);
 
 		JMenuItem mnTroGiup = new JMenuItem("Trợ giúp ");
 		mnTroGiup.setFont(UIManager.getFont("MenuBar.font"));
+		mnTroGiup.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new GUI_TroGiup(tk).setVisible(true);
+			}
+		});
 		menuBar.add(mnTroGiup);
+
+		JLabel lblTrangChu = new JLabel("Trang Chủ");
+		lblTrangChu.setForeground(new Color(101, 186, 118));
+		lblTrangChu.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTrangChu.setBounds(588, 44, 300, 50);
+		lblTrangChu.setFont(new Font("Times New Roman", Font.BOLD, 40));
+		contentPane.add(lblTrangChu);
 
 		JPanel panel_3_1 = new JPanel();
 		panel_3_1.setBorder(BorderFactory.createTitledBorder("Thông tin"));
@@ -429,18 +490,6 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 		txtThongTinMaPhong.setBounds(126, 30, 150, 30);
 		panel_3_1.add(txtThongTinMaPhong);
 
-		JLabel lblThongTinGioVaoPhong_1 = new JLabel("Giờ vào phòng");
-		lblThongTinGioVaoPhong_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblThongTinGioVaoPhong_1.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblThongTinGioVaoPhong_1.setBounds(5, 230, 120, 30);
-		panel_3_1.add(lblThongTinGioVaoPhong_1);
-
-		textField = new JTextField();
-		textField.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		textField.setColumns(10);
-		textField.setBounds(126, 230, 150, 30);
-		panel_3_1.add(textField);
-
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(
 				new TitledBorder(null, "Ch\u1EE9c n\u0103ng", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -457,9 +506,13 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 
 		JButton btnDatPhong = new JButton("Đặt phòng");
 		btnDatPhong.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new GUI_DatPhong().setVisible(true);
+				
+				if (phong!=null&&phong.getTinhTrang().equals("Trống")) {
+					dispose();
+					new GUI_DatPhong(phong,tk).setVisible(true);
+				}		
 			}
 		});
 		btnDatPhong.setBackground(new Color(255, 255, 140));
@@ -498,6 +551,7 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 				xemThongTin(p);
 			}
 		});
+
 	}
 
 	public void xemThongTin(Phong p) {
@@ -505,6 +559,7 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 		txtThongTinLoaiPhong.setText(p.getMaLoaiPhong().getTenLoaiPhong());
 		txtThongTinGiaPhong.setText(String.valueOf(p.getGiaPhong()));
 		txtTinTrangPhong.setText(p.getTinhTrang());
+		phong = p;
 	}
 
 	public void timKiemTheoMaPhong() {
@@ -571,7 +626,7 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 		}
 		if (dsTinhTrang == null && dsMaPhong == null) {
 			ds = dsLoaiPhong;
-			
+
 		}
 		danhSachTimKiem(ds);
 	}
@@ -607,7 +662,6 @@ public class GUI_XuLy extends JFrame implements MouseListener {
 //			}
 //		}
 //	}
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
 	}
