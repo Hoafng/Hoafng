@@ -1,21 +1,30 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.JCheckBox;
-import javax.swing.JButton;
+
+import connectDB.ConnectDB;
+import dao.Dao_DichVu;
+import entity.DichVu;
+import entity.Phong;
+import entity.TaiKhoan;
 
 public class GUI_ThanhToan extends JFrame {
 
@@ -30,35 +39,37 @@ public class GUI_ThanhToan extends JFrame {
 	private JTextField textFieldLoaiPhong;
 	private JTextField textFieldVAT;
 	private JTable table;
-	private JTextField textField;
-
+	private JTextField textField_ThanhTien;
+	private DefaultTableModel modelDichVu;
+	private double thanhTien = 0;
+	private Phong p;
+	private TaiKhoan tk;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI_ThanhToan frame = new GUI_ThanhToan();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 */
-	public GUI_ThanhToan() {
+	public GUI_ThanhToan(Phong phong,TaiKhoan taiKhoan) {
+		
+		try {
+			ConnectDB.getInstance().connect();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 680, 850);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		setLocationRelativeTo(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBackground(new Color(101, 186, 118));
+		p=phong;
+		tk=taiKhoan;
 		
 		JLabel lblThanhTon = new JLabel("Thanh Toán");
 		lblThanhTon.setFont(new Font("Times New Roman", Font.BOLD, 30));
@@ -71,7 +82,7 @@ public class GUI_ThanhToan extends JFrame {
 		contentPane.add(lblMaHoaDon);
 		
 		textFieldMaHoaDon = new JTextField();
-		textFieldMaHoaDon.setEnabled(false);
+		textFieldMaHoaDon.setEditable(false);
 		textFieldMaHoaDon.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldMaHoaDon.setColumns(10);
 		textFieldMaHoaDon.setBounds(152, 84, 158, 40);
@@ -83,7 +94,7 @@ public class GUI_ThanhToan extends JFrame {
 		contentPane.add(lblNgayLap);
 		
 		textFieldNgayLap = new JTextField();
-		textFieldNgayLap.setEnabled(false);
+		textFieldNgayLap.setEditable(false);
 		textFieldNgayLap.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldNgayLap.setColumns(10);
 		textFieldNgayLap.setBounds(457, 84, 158, 40);
@@ -95,7 +106,7 @@ public class GUI_ThanhToan extends JFrame {
 		contentPane.add(lblTenKhachHang);
 		
 		textFieldTenKhachHang = new JTextField();
-		textFieldTenKhachHang.setEnabled(false);
+		textFieldTenKhachHang.setEditable(false);
 		textFieldTenKhachHang.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldTenKhachHang.setColumns(10);
 		textFieldTenKhachHang.setBounds(152, 159, 158, 40);
@@ -107,7 +118,7 @@ public class GUI_ThanhToan extends JFrame {
 		contentPane.add(lblSoDienThoai);
 		
 		textFieldSoDienThoai = new JTextField();
-		textFieldSoDienThoai.setEnabled(false);
+		textFieldSoDienThoai.setEditable(false);
 		textFieldSoDienThoai.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldSoDienThoai.setColumns(10);
 		textFieldSoDienThoai.setBounds(457, 159, 158, 40);
@@ -120,7 +131,7 @@ public class GUI_ThanhToan extends JFrame {
 		
 		textFieldGiaPhong = new JTextField();
 		textFieldGiaPhong.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		textFieldGiaPhong.setEnabled(false);
+		textFieldGiaPhong.setEditable(false);
 		textFieldGiaPhong.setColumns(10);
 		textFieldGiaPhong.setBounds(152, 304, 158, 40);
 		contentPane.add(textFieldGiaPhong);
@@ -132,7 +143,7 @@ public class GUI_ThanhToan extends JFrame {
 		
 		textFieldMaNhanVien = new JTextField();
 		textFieldMaNhanVien.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		textFieldMaNhanVien.setEnabled(false);
+		textFieldMaNhanVien.setEditable(false);
 		textFieldMaNhanVien.setColumns(10);
 		textFieldMaNhanVien.setBounds(152, 229, 158, 40);
 		contentPane.add(textFieldMaNhanVien);
@@ -144,7 +155,7 @@ public class GUI_ThanhToan extends JFrame {
 		
 		textFieldMaPhong = new JTextField();
 		textFieldMaPhong.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		textFieldMaPhong.setEnabled(false);
+		textFieldMaPhong.setEditable(false);
 		textFieldMaPhong.setColumns(10);
 		textFieldMaPhong.setBounds(457, 229, 158, 40);
 		contentPane.add(textFieldMaPhong);
@@ -155,7 +166,7 @@ public class GUI_ThanhToan extends JFrame {
 		contentPane.add(lblLoaiPhong);
 		
 		textFieldLoaiPhong = new JTextField();
-		textFieldLoaiPhong.setEnabled(false);
+		textFieldLoaiPhong.setEditable(false);
 		textFieldLoaiPhong.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		textFieldLoaiPhong.setColumns(10);
 		textFieldLoaiPhong.setBounds(457, 304, 158, 40);
@@ -248,7 +259,7 @@ public class GUI_ThanhToan extends JFrame {
 		
 		textFieldVAT = new JTextField();
 		textFieldVAT.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		textFieldVAT.setEnabled(false);
+		textFieldVAT.setEditable(false);
 		textFieldVAT.setColumns(10);
 		textFieldVAT.setBounds(457, 436, 158, 40);
 		contentPane.add(textFieldVAT);
@@ -259,48 +270,17 @@ public class GUI_ThanhToan extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		table = new JTable();
-		table.setBounds(10, 10, 561, 169);
-		table.setToolTipText("");
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"DV008", "Bia Tiger", 20000 , 48},
-				{"DV012", "Đậu Phộng", 20000 , 10},
-				{"DV008", "Đĩa trái cây lớn", 180000 , 5},
-				{"DV008", "Gà Muối Cỏ", 250000 , 3},
-				{"DV008", "Bia Tiger", 20000 , 48},
-				{"DV008", "Bia Tiger", 20000 , 48},
-				{"DV008", "Bia Tiger", 20000 , 48},
-				{"DV008", "Bia Tiger", 20000 , 48},
-				{"DV012", "Đậu Phộng", 20000 , 10},
-				{"DV008", "Đĩa trái cây lớn", 180000 , 5},
-				{"DV008", "Gà Muối Cỏ", 250000 , 3},
-				{"DV008", "Bia Tiger", 20000 , 48},
-				{"DV008", "Bia Tiger", 20000 , 48},
-				{"DV008", "Bia Tiger", 20000, 48}
-			},
-			new String[] {
-				"Mã loại dịch vụ", "Tên dịch vụ", "Giá", "Số lượng"
-			}
-		));
-		table.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		panel.add(table);
-		
-		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(10, 10, 561, 133);
-		panel.add(scrollPane);
-		
 		JLabel lblThanhTien = new JLabel("Thành tiền");
 		lblThanhTien.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		lblThanhTien.setBounds(246, 680, 120, 40);
 		contentPane.add(lblThanhTien);
 		
-		textField = new JTextField();
-		textField.setEnabled(false);
-		textField.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		textField.setColumns(10);
-		textField.setBounds(317, 680, 158, 40);
-		contentPane.add(textField);
+		textField_ThanhTien = new JTextField();
+		textField_ThanhTien.setEditable(false);
+		textField_ThanhTien.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		textField_ThanhTien.setColumns(10);
+		textField_ThanhTien.setBounds(317, 680, 158, 40);
+		contentPane.add(textField_ThanhTien);
 		
 		JCheckBox chckbx_InHoaDon = new JCheckBox("In hóa đơn");
 		chckbx_InHoaDon.setFont(new Font("Times New Roman", Font.PLAIN, 16));
@@ -316,5 +296,40 @@ public class GUI_ThanhToan extends JFrame {
 		btnHuy.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		btnHuy.setBounds(391, 762, 123, 40);
 		contentPane.add(btnHuy);
+		btnHuy.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new GUI_XuLy(tk).setVisible(true);
+			
+			}
+		});
+		
+		String[] colHeader = { "Mã dịch vụ", "Tên dịch vụ", "Giá", "Số lượng" };
+		modelDichVu = new DefaultTableModel(colHeader, 0);
+		table = new JTable(modelDichVu);
+		table.setFillsViewportHeight(true);
+		table.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		table.setBounds(10, 10, 561, 169);
+		panel.add(table);
+		JScrollPane cpDichVu = new JScrollPane(table);
+		cpDichVu.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		cpDichVu.setBounds(10, 10, 561, 133);
+		panel.add(cpDichVu);
+		table.setRowHeight(10);
+
+		docDuLieuTuSQL();
+		
 	}
+	private void docDuLieuTuSQL() {
+		
+		Dao_DichVu dichvu = new Dao_DichVu();
+		table.setRowHeight(25);
+		for (DichVu d : dichvu.getAllDichVuTuMaHoaDon()) {
+			Object[] rowData = { d.getMaDichVu(), d.getTenDichVu(), d.getGiaDichVu(), d.getSoLuong()};
+			modelDichVu.addRow(rowData);
+			thanhTien = d.getGiaDichVu() + thanhTien;
+		}
+		textField_ThanhTien.setText(thanhTien+"d");
+	}
+	
 }

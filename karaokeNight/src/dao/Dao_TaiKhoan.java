@@ -10,22 +10,19 @@ import entity.Phong;
 import entity.TaiKhoan;
 
 public class Dao_TaiKhoan {
-	public TaiKhoan tk;
 	public TaiKhoan getTaiKhoan(String tenTaiKhoan,String matKhau) {
-		tenTaiKhoan ="nhanvien01";
-		matKhau ="nhanvien01";
+		TaiKhoan tk=null;
 		ConnectDB.getInstance();
 		Connection con = ConnectDB.getConnection();
 		PreparedStatement statement = null;
 		try {
-			String sql = "Select * From Phong where tenTaiKhoan = ? and matKhau = ?";
+			String sql = "Select * From TaiKhoan where tenTaiKhoan = ? and matKhau = ?";
 			statement = con.prepareStatement(sql);
 			statement.setString(1, tenTaiKhoan);
 			statement.setString(2, matKhau);
 			ResultSet rs = statement.executeQuery();
 			if(rs.next()) {
-				tk.setTenTaiKhoan(tenTaiKhoan);
-				tk.setMatKhau(matKhau);
+				tk=new TaiKhoan(rs.getString("tenTaiKhoan"), rs.getString("matKhau"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -45,5 +42,23 @@ public class Dao_TaiKhoan {
 			e.printStackTrace();
 		}
 	}
-	
+	public TaiKhoan getTaiKhoan(String tenTaiKhoan) {
+		TaiKhoan tk=null;
+		ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		PreparedStatement statement = null;
+		try {
+			String sql = "Select * From TaiKhoan where tenTaiKhoan = ?";
+			statement = con.prepareStatement(sql);
+			statement.setString(1, tenTaiKhoan);
+			ResultSet rs = statement.executeQuery();
+			if(rs.next()) {
+				tk=new TaiKhoan(rs.getString("tenTaiKhoan"), rs.getString("matKhau"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tk;
+	}
+
 }

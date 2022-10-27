@@ -1,13 +1,13 @@
 package entity;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 import java.util.Objects;
 
 public class PhieuDatPhong {
 	private String maPhieuDatPhong;
 	private int soGioDat;
-	private LocalDateTime ngayDatPhong;
-	private LocalDateTime ngayNhanPhong;
+	private Date ngayDatPhong;
+	private Date ngayNhanPhong;
 	private Phong maPhong;
 	private KhachHang maKhachHang;
 	public String getMaPhieuDatPhong() {
@@ -22,16 +22,16 @@ public class PhieuDatPhong {
 	public void setSoGioDat(int soGioDat) {
 		this.soGioDat = soGioDat;
 	}
-	public LocalDateTime getNgayDatPhong() {
+	public Date getNgayDatPhong() {
 		return ngayDatPhong;
 	}
-	public void setNgayDatPhong(LocalDateTime ngayDatPhong) {
+	public void setNgayDatPhong(Date ngayDatPhong) {
 		this.ngayDatPhong = ngayDatPhong;
 	}
-	public LocalDateTime getNgayNhanPhong() {
+	public Date getNgayNhanPhong() {
 		return ngayNhanPhong;
 	}
-	public void setNgayNhanPhong(LocalDateTime ngayNhanPhong) {
+	public void setNgayNhanPhong(Date ngayNhanPhong) {
 		this.ngayNhanPhong = ngayNhanPhong;
 	}
 	public Phong getMaPhong() {
@@ -46,7 +46,7 @@ public class PhieuDatPhong {
 	public void setMaKhachHang(KhachHang maKhachHang) {
 		this.maKhachHang = maKhachHang;
 	}
-	public PhieuDatPhong(String maPhieuDatPhong, int soGioDat, LocalDateTime ngayDatPhong, LocalDateTime ngayNhanPhong,
+	public PhieuDatPhong(String maPhieuDatPhong, int soGioDat, Date ngayDatPhong, Date ngayNhanPhong,
 			Phong maPhong, KhachHang maKhachHang) {
 		super();
 		this.maPhieuDatPhong = maPhieuDatPhong;
@@ -81,9 +81,8 @@ public class PhieuDatPhong {
 	@Override
 	public String toString() {
 		return "PhieuDatPhong [maPhieuDatPhong=" + maPhieuDatPhong + ", soGioDat=" + soGioDat + ", ngayDatPhong="
-				+ ngayDatPhong + ", ngayNhanPhong=" + ngayNhanPhong + ", maPhong=" + maPhong + ", maKhachHang="
+				+ ngayDatPhong + ", ngayNhanPhong=" + ngayNhanPhong + ", maPhong=" + maPhong + ", soDienThoai="
 				+ maKhachHang + "]";
 	}
-	
 	
 }
